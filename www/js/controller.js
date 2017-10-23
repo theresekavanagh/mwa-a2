@@ -13,7 +13,7 @@ var myToDoApp = angular.module('myToDoListModule', []);
 
 
 // 2. create and register our controller with this module
-myToDoApp.controller('myToDoListController', function($scope) {
+myToDoApp.controller('myToDoListController', function ($scope) {
 
 
     //set up a variable to contain our data
@@ -30,7 +30,8 @@ myToDoApp.controller('myToDoListController', function($scope) {
         $scope.toDoList.push(
             {
                 name: $scope.newToDoItem.name,
-                description: $scope.newToDoItem.description, done:false
+                description: $scope.newToDoItem.description,
+                done: false
             }
         );
 
