@@ -1,0 +1,88 @@
+<!--
+Date: 23/10/2017
+Author: Therese Kavanagh
+WebElevate 5.1 - Coding Stream
+MWA Assessment 2 - Angular JS (To Do App)
+-->
+
+<!doctype html>
+
+<html >
+ <meta charset="UTF-8"> 
+<head>
+        <link rel="stylesheet" href="css/styles.css">
+        <title>TKs2Dos</title>
+
+</head>
+
+<body>
+    
+    <header>
+        <h1>TKs2Dos <img class="appIcon" src="icon.png" width="40" valign="middle"></h1>
+    </header>
+    <!-- tie the controller and module to the html -->
+    <div class="container" id="myToDoList" data-ng-app="myToDoListModule" data-ng-controller="myToDoListController">
+        
+        <div class="addToDos">
+            
+            <form>
+                <!-- tie the user inputs to the controller to grab the inputs and push into the list displayed below on submit-->
+                <div><input type="text" placeholder="Add a title..." data-ng-model="newToDoItem.name" /></div>
+
+                <div><input type="text" placeholder="Add a description..." data-ng-model="newToDoItem.description" /></div>
+
+                <input class="addToList" data-ng-click="addtoList()"  type="submit" value="Add To My To Do List">
+
+            </form>
+            
+        </div><!-- /addToDos -->
+        
+        <div class="myToDos">
+
+            <h2>My To Do List</h2>   
+            
+            <!-- count and display the amount of items in the list - I got the idea for this from this post https://stackoverflow.com/questions/35041618/ng-if-check-if-array-is-empty -->
+            <p ng-if="toDoList.length == 0">Your List is Empty. Add Some To Dos.</p>
+
+            <p ng-if="toDoList.length == 1">{{toDoList.length}} Item in Your List.</p>
+
+            <p ng-if="toDoList.length > 1">{{toDoList.length}} Items in Your List.</p>
+
+            <!-- display all To Do Items added to the list in a html unordered list below -->
+            <!-- Source for visually marking of 'To Do Item' as 'done' : https://angularjs.org/ -->
+            <ul id="toDos"> 
+                
+                <li data-ng-repeat="currentItem in toDoList" >
+                    
+                    <span class="toDoItem">
+                        <!-- add a checkbox so the user can mark the item as 'done' to visually cross it out -->
+                        <input type="checkbox" ng-model="toDoItem.done">
+                        <span class="done-{{toDoItem.done}}"> <strong>{{currentItem.name}}:</strong> {{currentItem.description}} </span> 
+                    </span>
+                    
+                    <!-- option for the user to permenantly delete the item from the list -->
+                    <span class="deleteToDo">
+                        <input class="deleteFromList" ng-click="deleteFromList($index)" type="submit" value="Delete">
+                    </span>
+                    
+                </li>
+                
+            </ul>
+
+        </div><!-- /myToDos -->
+        
+    </div><!-- /container -->
+    
+    <footer>Copyright Therese Kavanagh &copy; 2017</footer>
+    
+    <!-- Load scripts at end of file as per best practices -->
+    <!-- load angular.js first -->    
+    <script src="js/angular.js"></script>
+    <!--    Note: can also include this from the CDN but downloaded angular locally for this assignment in case of any connection issues. 
+            CDN link here <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>-->  
+    <!-- load the controller js -->
+    <script src="js/controller.js"></script>
+    
+</body>
+
+</html>
